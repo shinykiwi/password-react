@@ -18,7 +18,6 @@ function valuetext(value) {
 
 function App() {
     const [strength, setStrength] = useState(8);
-    const [strColour, setStrColour] = useState("#1ea95a")
     const [length, setLength] = useState(8);
 
     const [specialChar, setSpecialChar] = useState(false);

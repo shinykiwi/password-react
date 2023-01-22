@@ -27,9 +27,16 @@ export const calculateTimeToCrack = function (password) {
         characterCount += 8
     }
 
-    let combinationCount = Math.pow(characterCount, password.length);
+    let combinationCount = factorial(characterCount)
+    function factorial(n) {
+        if (n === 0) {
+            return 1;
+        }
+        return n * factorial(n - 1);
+    }
     // Calculate the time to crack the password in seconds
-    let total_time = (combinationCount / 2000000000);
+    let total_time = (combinationCount / 1000000000);
+    console.log('combinations: ' + combinationCount)
 
     let seconds = Math.floor(total_time % 60);
     total_time = (total_time - seconds) / 60;
@@ -51,13 +58,14 @@ export const calculateTimeToCrack = function (password) {
     let date_string = '';
 
     if (years > 1000) {
-        return Math.floor(years/1000) + "000+ years"
+        return Math.round(years/1000) * 1000 + " years"
     }
     const MAX_TIMESCALES = 3
     let current = 0
-    let timescales = [[years, 'y'], [months, 'm'], [days, 'd'], [hours, 'h'], [minutes, 'm'], [seconds, 's']]
+    let timescales = [[years, 'y'], [months, 'mo'], [days, 'd'], [hours, 'h'], [minutes, 'm'], [seconds, 's']]
     timescales.forEach(function(timescale) {
         if (timescale[0] > 0) {
+            console.log('current', current)
 
             date_string += " " + timescale[0] + timescale[1]
             current++
