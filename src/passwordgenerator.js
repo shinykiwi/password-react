@@ -49,7 +49,7 @@ const calculateTimeToCrack = function(password) {
     console.log("Year: " + timeTCYear + " Day: " + timeTCDay + " Hour: " + timeTCHour + " Minute: " + timeTCMin + " Second: " + timeTCSec);
 
     // Return the time to crack in minutes
-    let toString = (timeTCYear + " Years, " + timeTCDay + " Days, " + timeTCHour + " Hours, " + timeTCMin + " Minutes, " + timeTCSec + " Seconds");
+    let toString = (timeTCYear + " Yr, " + timeTCDay + " Day, " + timeTCHour + " Hr, " + timeTCMin + " Min, " + timeTCSec + " Sec");
 
     return toString;
 }
