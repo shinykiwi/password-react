@@ -112,7 +112,7 @@ export const generatePassword = function(length, numbers, specialChar) {
         var x = length
 
         while (true) {
-            var pick = Array.from({length: 4}, () => Math.floor(Math.random() * (x - 2) + 2));
+            var pick = Array.from({length: 3}, () => Math.floor(Math.random() * (x - 2) + 2));
             if (pick.reduce((a, b) => a + b) === x) break;
         }
         var result = pick;
