@@ -32,8 +32,23 @@ function App() {
         console.log(val)
         setStrength(val)
 
-        if(val === 8) {
-
+        if(val === 8){
+            setNoun("Weak")
+        }
+        else if(val === 16) {
+            setNoun("Ok")
+        }
+        else if(val === 24){
+            setNoun("Good")
+        }
+        else if(val === 32){
+            setNoun("Great")
+        }
+        else if(val === 40){
+            setNoun("Strong")
+        }
+        else{
+            setNoun("Very Strong")
         }
 
     }
@@ -81,7 +96,7 @@ function App() {
                                 step={8}
                                 marks
                                 min={8}
-                                max={64}
+                                max={48}
                                 onChange={(e)=> handleChange(e)}
                             />
                         </div>
