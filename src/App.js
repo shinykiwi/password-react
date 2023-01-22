@@ -31,6 +31,11 @@ function App() {
 
     const [password, setPassword] = useState("Password")
 
+    const handleTextChange = (e) => {
+        setPassword(e.target.value)
+        handleChange(e)
+    }
+
     const handleSpecial = (e) => {
         setSpecialChar(e.target.checked)
         if (e.target.checked){
@@ -58,7 +63,7 @@ function App() {
         const val = e.target.value
         console.log(val)
         setStrength(val)
-        setCrackTime(calculateTimeToCrack('password123'))
+        setCrackTime(calculateTimeToCrack(password))
 
         if(val === 8){
             setNoun("Weak")
@@ -108,7 +113,8 @@ function App() {
                     <Box className={"box"}>
                         <h2>Create a password</h2>
                         <div>
-                            <TextField id="outlined-basic" label={password} variant="outlined" />
+                            <TextField id="outlined-basic" label="Password" value={password} variant="outlined"
+                                       onChange={(e) => handleTextChange(e)}/>
                             <IconButton aria-label="copy">
                                 <ContentCopyIcon />
                             </IconButton>
