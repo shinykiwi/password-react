@@ -12,25 +12,6 @@ import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgr
 import VpnKeyIcon from '@mui/icons-material/VpnKey';
 import InfoIcon from '@mui/icons-material/Info';
 import {useState} from "react";
-import { initializeApp } from "firebase/app";
-import { getFirestore } from "@firebase/firestore"
-
-const firebaseConfig = {
-  apiKey: "AIzaSyC4prHzu1sgv8ucS5fKTtx0XTcVl8tnmjw",
-  authDomain: "password-app-519f3.firebaseapp.com",
-  databaseURL: "https://password-app-519f3-default-rtdb.firebaseio.com",
-  projectId: "password-app-519f3",
-  storageBucket: "password-app-519f3.appspot.com",
-  messagingSenderId: "57679699233",
-  appId: "1:57679699233:web:fb06c9e0b8977d9227b260",
-  measurementId: "G-46632LYQ4E"
-};
-const app = initializeApp(firebaseConfig);
-export const firestore = getFirestore(app)
-
-import './App.css';
-import handleSubmit from './handles/handlesubmit';
-import { useRef } from 'react';
 
 function valuetext(value) {
     return `${value}°C`;
