@@ -41,7 +41,7 @@ const calculateTimeToCrack = function(password) {
     let timeTCHour = Math.floor(timeTC % 24);
     timeTC = (timeTC - timeTCHour) / 60;
 
-    let timeTCDay = Math.floor(timeTC / 24);
+    let timeTCDay = Math.floor(timeTC % 24);
     timeTC = (timeTC - timeTCDay) / 24;
 
     let timeTCYear = Math.floor(timeTC / 365);
