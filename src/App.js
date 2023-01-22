@@ -1,20 +1,16 @@
-import logo from './logo.svg';
 import './App.css';
 import * as React from 'react';
+import {createContext, useEffect, useState} from 'react';
 import Box from '@mui/material/Box';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Slider from '@mui/material/Slider';
-import {Alert, AlertTitle, Button, IconButton, Paper, styled, TextField} from "@mui/material";
+import {IconButton, styled, TextField} from "@mui/material";
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
-import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgress';
-import VpnKeyIcon from '@mui/icons-material/VpnKey';
-import InfoIcon from '@mui/icons-material/Info';
+import LinearProgress, {linearProgressClasses} from '@mui/material/LinearProgress';
 import ShuffleOnIcon from '@mui/icons-material/ShuffleOn';
-import {useEffect, useState} from "react";
-import calculateTimeToCrack from "./passwordgenerator";
-import generatePassword from "./passwordgenerator";
+import {calculateTimeToCrack, generatePassword} from "./passwordgenerator";
 
 function valuetext(value) {
     return `${value}`;
@@ -105,7 +101,7 @@ function App() {
 
     const onGenerate = () =>{
         // generate password
-        // generatePassword(password)
+        setPassword(generatePassword(length, numbers, specialChar))
     }
 
     const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({

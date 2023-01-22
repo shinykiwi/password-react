@@ -1,5 +1,9 @@
+import {MyContext} from "./App";
+import {createContext} from "react";
+
+
 //time to crack password
-const calculateTimeToCrack = function(password) {
+export const calculateTimeToCrack = function(password) {
     // Get the number of possible characters for the password
     let characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%&*?";
     let characterCount = 0;
@@ -54,8 +58,6 @@ const calculateTimeToCrack = function(password) {
     return toString;
 }
 
-export default calculateTimeToCrack;
-
 // //password generator
 // function updateContent() {
 //     var inputValue = document.getElementById("myTextbox").value;
@@ -65,13 +67,13 @@ export default calculateTimeToCrack;
 //     document.getElementById("result").innerHTML = returnpassword;
 // }
 
-function generatePassword(length, numbersincluded, specialcharincluded) {
+export const generatePassword = function(length, numbers, specialChar) {
     const lettersLower = "abcdefghijklmnopqrstuvwxyz".split("");
     const lettersUpper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
     const digits = "0123456789".split("");
     const symbols = "!@#$%&*?".split("");
 
-    if (numbersincluded == true && specialcharincluded == true) {
+    if (numbers == true && specialChar == true) {
 
         var x = length
 
@@ -105,7 +107,7 @@ function generatePassword(length, numbersincluded, specialcharincluded) {
         password = password_list.join("");
         console.log("Your password is: " + password);
 
-    } else if (numbersincluded == false && specialcharincluded == true) {
+    } else if (numbers == false && specialChar == true) {
 
         var x = length
 
@@ -135,7 +137,7 @@ function generatePassword(length, numbersincluded, specialcharincluded) {
         password = password_list.join("");
         console.log("Your password is: " + password);
 
-    } else if (numbersincluded == true && specialcharincluded == false) {
+    } else if (numbers == true && specialChar == false) {
         var x = length
 
         while (true) {
@@ -162,7 +164,7 @@ function generatePassword(length, numbersincluded, specialcharincluded) {
         var password_list = password.split("");
         password_list = shuffle(password_list);
         password = password_list.join("");
-    } else if (numbersincluded == false && specialcharincluded == false) {
+    } else if (numbers == false && specialChar == false) {
         var x = length
 
         while (true) {
@@ -185,6 +187,7 @@ function generatePassword(length, numbersincluded, specialcharincluded) {
         var password_list = password.split("");
         password_list = shuffle(password_list);
         password = password_list.join("");
+        return password
     }
 
     function shuffle(array) {
