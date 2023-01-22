@@ -15,15 +15,20 @@ import {useState} from "react";
 import calculateTimeToCrack from "./passwordgenerator";
 
 function valuetext(value) {
-    return `${value}°C`;
+    return `${value}`;
 }
 
 function App() {
     const [strength, setStrength] = useState(8);
     const [strColour, setStrColour] = useState("#1ea95a")
     const [length, setLength] = useState(8);
+
     const [noun, setNoun] = useState("Weak");
     const [crack_time, setCrackTime] = useState("N/A");
+    
+    const [specialChar, setSpecialChar] = useState(false);
+    const [numbers, setNumbers] = useState(false);
+
 
     const handleChange = (e) => {
         const val = e.target.value
@@ -33,23 +38,21 @@ function App() {
 
         if(val === 8){
             setNoun("Weak")
-            setStrength(Number(100*(1/4)))
+            setStrength(Number(100*(0/4)))
         }
         else if(val === 16) {
             setNoun("Ok")
-            setStrength(Number(100*(2/4)))
+            setStrength(Number(100*(1/4)))
         }
         else if(val === 24){
             setNoun("Good")
-            setStrength(Number(100*(3/4)))
+            setStrength(Number(100*(2/4)))
         }
         else if(val === 32){
             setNoun("Great")
-            setStrength(Number(100*(4/4)))
+            setStrength(Number(100*(3/4)))
         }
-
     }
-
 
     const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
         height: 10,
@@ -79,8 +82,8 @@ function App() {
                         </div>
                         <div>
                             <FormGroup>
-                                <FormControlLabel control={<Checkbox defaultChecked />} label="Special Characters" />
-                                <FormControlLabel control={<Checkbox />} label="Numbers" />
+                                <FormControlLabel control={<Checkbox checked={specialChar}/>} label="Special Characters" onChange={(e)=> handleChange(e)}/>
+                                <FormControlLabel control={<Checkbox checked={numbers}/>} label="Numbers" onChange={(e)=> handleChange(e)}/>
                             </FormGroup>
                         </div>
                         <div>
