@@ -25,9 +25,11 @@ function App() {
 
     const [noun, setNoun] = useState("Weak");
     const [crack_time, setCrackTime] = useState("N/A");
-    
+
     const [specialChar, setSpecialChar] = useState(false);
     const [numbers, setNumbers] = useState(false);
+
+    const [password, setPassword] = useState("Password")
 
 
     const handleChange = (e) => {
@@ -75,8 +77,8 @@ function App() {
                     <Box className={"box"}>
                         <h2>Create a password</h2>
                         <div>
-                            <TextField id="outlined-basic" label="Password" variant="outlined" />
-                            <IconButton aria-label="delete">
+                            <TextField id="outlined-basic" label={password} variant="outlined" />
+                            <IconButton aria-label="copy">
                                 <ContentCopyIcon />
                             </IconButton>
                         </div>
