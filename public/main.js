@@ -3,8 +3,8 @@ const { app, BrowserWindow } = require('electron')
 function createWindow () {
     // Create the browser window.
     const win = new BrowserWindow({
-        width: 800,
-        height: 600,
+        width: 450,
+        height: 650,
         webPreferences: {
             nodeIntegration: true
         }
@@ -13,9 +13,12 @@ function createWindow () {
     //load the index.html from a url
     win.loadURL('http://localhost:3000');
 
-    // Open the DevTools.
-    win.webContents.openDevTools()
     win.autoHideMenuBar = true;
+    win.setTitle("BitPass")
+
+    // Open the DevTools.
+    // win.webContents.openDevTools()
+
 }
 
 // This method will be called when Electron has finished
