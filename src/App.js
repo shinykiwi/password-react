@@ -24,73 +24,70 @@ function App() {
     const [strColour, setStrColour] = useState("#1ea95a")
     const [length, setLength] = useState(8);
 
-    const [noun, setNoun] = useState("Weak");
-    const [crack_time, setCrackTime] = useState("N/A");
-
     const [specialChar, setSpecialChar] = useState(false);
     const [numbers, setNumbers] = useState(false);
 
     const [password, setPassword] = useState("Password")
 
+    const [noun, setNoun] = useState("Weak");
+    const [crack_time, setCrackTime] = useState(calculateTimeToCrack(password));
+
     const handleTextChange = (e) => {
         setPassword(e.target.value)
-        handleChange(e)
+        handleChange()
     }
 
     const handleSpecial = (e) => {
         setSpecialChar(e.target.checked)
-        if (e.target.checked){
-            setStrength(strength + ((1/6)*100))
-        }
-        else{
-            setStrength(strength - ((1/6)*100))
-        }
-        console.log(strength)
+        handleChange()
     }
 
     const handleNumbers = (e) => {
         setNumbers(e.target.checked)
-        if(e.target.checked){
-            setStrength(strength + ((1/6)*100))
-        }
-        else{
-            setStrength(strength - ((1/6)*100))
-        }
-        console.log(strength)
+        handleChange()
+    }
+
+    const handleSliderChange = (e) => {
+        setLength(e.target.value)
+        handleChange()
     }
 
 
-    const handleChange = (e) => {
-        const val = e.target.value
-        console.log(val)
-        setStrength(val)
-        setCrackTime(calculateTimeToCrack(password))
+    const handleChange = () => {
+        setCrackTime(calculateTimeToCrack(password))  // Update crack time
+        let strength = 0, noun;
 
-        if(val === 8){
-            setNoun("Weak")
-            setStrength(Number(100*(1/6)))
+        if (numbers)
+            strength += (1/8) * 100
+        if(specialChar)
+            strength += (1/8) * 100
+        if(length <= 8) {
+            noun = "Weak"
+            strength += (1/8) * 100
         }
-        else if(val === 16) {
-            setNoun("Ok")
-            setStrength(Number(100*(2/6)))
+        else if(length <= 16) {
+            noun = "Ok"
+            strength += (2/8) * 100
         }
-        else if(val === 24){
-            setNoun("Good")
-            setStrength(Number(100*(3/6)))
+        else if(length <= 24){
+            noun = "Good"
+            strength += (3/8) * 100
         }
-        else if(val === 32){
-            setNoun("Great")
-            setStrength(Number(100*(4/6)))
+        else if(length <= 32){
+            noun = "Great"
+            strength += (4/8) * 100
         }
-        else if(val === 40){
-            setNoun("Strong")
-            setStrength(Number(100*(5/6)))
+        else if(length <= 40){
+            noun = "Strong"
+            strength += (5/8) * 100
         }
-        else if(val === 48){
-            setNoun("Very Strong")
-            setStrength(Number(100*(6/6)))
+        else if(length <= 48){
+            noun = "Very Strong"
+            strength += (6/8) * 100
         }
-        console.log(strength)
+        setNoun(noun)
+        setStrength(strength)
+        console.log('strength: ' + strength)
     }
 
     const onGenerate = (e) =>{
@@ -144,7 +141,7 @@ function App() {
                                 marks
                                 min={8}
                                 max={48}
-                                onChange={(e)=> handleChange(e)}
+                                onChange={(e)=> handleSliderChange(e)}
                             />
                         </div>
                         <p>{noun}</p>
