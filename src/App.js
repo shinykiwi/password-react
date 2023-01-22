@@ -11,6 +11,7 @@ import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgress';
 import VpnKeyIcon from '@mui/icons-material/VpnKey';
 import InfoIcon from '@mui/icons-material/Info';
+import ShuffleOnIcon from '@mui/icons-material/ShuffleOn';
 import {useState} from "react";
 import calculateTimeToCrack from "./passwordgenerator";
 
@@ -92,6 +93,10 @@ function App() {
         console.log(strength)
     }
 
+    const onGenerate = (e) =>{
+
+    }
+
     const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
         height: 10,
         borderRadius: 5,
@@ -115,8 +120,11 @@ function App() {
                         <div>
                             <TextField id="outlined-basic" label="Password" value={password} variant="outlined"
                                        onChange={(e) => handleTextChange(e)}/>
-                            <IconButton aria-label="copy">
+                            <IconButton aria-label="copy" onClick={() => {navigator.clipboard.writeText(password)}}>
                                 <ContentCopyIcon />
+                            </IconButton>
+                            <IconButton aria-label="generate" onClick={(e) => onGenerate(e)}>
+                                <ShuffleOnIcon />
                             </IconButton>
                         </div>
                         <div>
