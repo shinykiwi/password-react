@@ -32,20 +32,19 @@ const calculateTimeToCrack = function(password) {
     // Calculate the time to crack the password in seconds
     let timeTC = (combinationCount / 1000000000);
 
-    let timeTCSec = (timeTC % 60);
+    let timeTCSec = Math.floor(timeTC % 60);
     timeTC = (timeTC - timeTCSec) / 60;
 
-    let timeTCMin = (timeTC % 60);
+    let timeTCMin = Math.floor(timeTC % 60);
     timeTC = (timeTC - timeTCMin) / 60;
 
-    let timeTCHour = (timeTC % 24);
+    let timeTCHour = Math.floor(timeTC % 24);
     timeTC = (timeTC - timeTCHour) / 60;
 
-    let timeTCDay = (timeTC / 24);
+    let timeTCDay = Math.floor(timeTC / 24);
     timeTC = (timeTC - timeTCDay) / 24;
 
-    let timeTCYear = (timeTC / 365);
-
+    let timeTCYear = Math.floor(timeTC / 365);
 
     console.log("Year: " + timeTCYear + " Day: " + timeTCDay + " Hour: " + timeTCHour + " Minute: " + timeTCMin + " Second: " + timeTCSec);
 
