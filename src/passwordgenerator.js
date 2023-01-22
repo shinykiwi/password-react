@@ -105,41 +105,37 @@ function generatePassword(length, numbersincluded, specialcharincluded) {
         password = password_list.join("");
         console.log("Your password is: " + password);
 
-    }
+    } else if (numbersincluded == false && specialcharincluded == true) {
 
-    else if (numbersincluded == false && specialcharincluded == true) {
+        var x = length
 
-            var x = length
+        while (true) {
+            var pick = Array.from({length: 4}, () => Math.floor(Math.random() * (x - 2) + 2));
+            if (pick.reduce((a, b) => a + b) === x) break;
+        }
+        var result = pick;
 
-            while (true) {
-                var pick = Array.from({length: 4}, () => Math.floor(Math.random() * (x - 2) + 2));
-                if (pick.reduce((a, b) => a + b) === x) break;
-            }
-            var result = pick;
+        var numofletterlower = result[0];
+        var numofletterupper = result[1];
+        var numofsymbols = result[2];
 
-            var numofletterlower = result[0];
-            var numofletterupper = result[1];
-            var numofsymbols = result[2];
-
-            var password = "";
-            for (var i = 0; i < numofletterlower; i++) {
-                password += lettersLower[Math.floor(Math.random() * lettersLower.length)];
-            }
-            for (var i = 0; i < numofletterupper; i++) {
-                password += lettersUpper[Math.floor(Math.random() * lettersUpper.length)];
-            }
-            for (var i = 0; i < numofsymbols; i++) {
-                password += symbols[Math.floor(Math.random() * symbols.length)];
-            }
-
-            var password_list = password.split("");
-            password_list = shuffle(password_list);
-            password = password_list.join("");
-            console.log("Your password is: " + password);
-
+        var password = "";
+        for (var i = 0; i < numofletterlower; i++) {
+            password += lettersLower[Math.floor(Math.random() * lettersLower.length)];
+        }
+        for (var i = 0; i < numofletterupper; i++) {
+            password += lettersUpper[Math.floor(Math.random() * lettersUpper.length)];
+        }
+        for (var i = 0; i < numofsymbols; i++) {
+            password += symbols[Math.floor(Math.random() * symbols.length)];
         }
 
-    else if (numbersincluded == true && specialcharincluded == false) {
+        var password_list = password.split("");
+        password_list = shuffle(password_list);
+        password = password_list.join("");
+        console.log("Your password is: " + password);
+
+    } else if (numbersincluded == true && specialcharincluded == false) {
         var x = length
 
         while (true) {
@@ -166,48 +162,47 @@ function generatePassword(length, numbersincluded, specialcharincluded) {
         var password_list = password.split("");
         password_list = shuffle(password_list);
         password = password_list.join("");
+    } else if (numbersincluded == false && specialcharincluded == false) {
+        var x = length
+
+        while (true) {
+            var pick = Array.from({length: 2}, () => Math.floor(Math.random() * (x - 2) + 2));
+            if (pick.reduce((a, b) => a + b) === x) break;
+        }
+        var result = pick;
+
+        var numofletterlower = result[0];
+        var numofletterupper = result[1];
+
+        var password = "";
+        for (var i = 0; i < numofletterlower; i++) {
+            password += lettersLower[Math.floor(Math.random() * lettersLower.length)];
+        }
+        for (var i = 0; i < numofletterupper; i++) {
+            password += lettersUpper[Math.floor(Math.random() * lettersUpper.length)];
+        }
+
+        var password_list = password.split("");
+        password_list = shuffle(password_list);
+        password = password_list.join("");
     }
 
-    else if (numbersincluded == false && specialcharincluded == false) {
-    var x = length
+    function shuffle(array) {
+        var currentIndex = array.length, temporaryValue, randomIndex;
 
-    while (true) {
-        var pick = Array.from({length: 2}, () => Math.floor(Math.random() * (x - 2) + 2));
-        if (pick.reduce((a, b) => a + b) === x) break;
+        // While there remain elements to shuffle...
+        while (0 !== currentIndex) {
+
+            // Pick a remaining element...
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex -= 1;
+
+            // And swap it with the current element.
+            temporaryValue = array[currentIndex];
+            array[currentIndex] = array[randomIndex];
+            array[randomIndex] = temporaryValue;
+        }
+
+        return array;
     }
-    var result = pick;
-
-    var numofletterlower = result[0];
-    var numofletterupper = result[1];
-
-    var password = "";
-    for (var i = 0; i < numofletterlower; i++) {
-        password += lettersLower[Math.floor(Math.random() * lettersLower.length)];
-    }
-    for (var i = 0; i < numofletterupper; i++) {
-        password += lettersUpper[Math.floor(Math.random() * lettersUpper.length)];
-    }
-
-    var password_list = password.split("");
-    password_list = shuffle(password_list);
-    password = password_list.join("");
-}
-
-function shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
-
-    // While there remain elements to shuffle...
-    while (0 !== currentIndex) {
-
-        // Pick a remaining element...
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex -= 1;
-
-        // And swap it with the current element.
-        temporaryValue = array[currentIndex];
-        array[currentIndex] = array[randomIndex];
-        array[randomIndex] = temporaryValue;
-    }
-
-    return array;
 }
