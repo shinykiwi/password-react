@@ -65,38 +65,15 @@ export default calculateTimeToCrack;
 //     document.getElementById("result").innerHTML = returnpassword;
 // }
 
-function generatePassword(slider_value, numbersincluded, specialcharincluded) {
+function generatePassword(length, numbersincluded, specialcharincluded) {
     const lettersLower = "abcdefghijklmnopqrstuvwxyz".split("");
     const lettersUpper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
     const digits = "0123456789".split("");
     const symbols = "!@#$%&*?".split("");
 
     if (numbersincluded == true && specialcharincluded == true) {
-        let strengthLabel = document.getElementById("strengthLabel")
-        let text;
-        switch (slider_value) {
-            case '0':
-                text = '8 characters'
-                break;
-            case '1':
-                text = '16 characters'
-                break;
-            case '2':
-                text = '32 characters'
-                break;
-            case '3':
-                text = '64 characters'
-                break;
-        }
-        document.getElementById("strengthLabel").textContent = text
 
-
-        slider_value = parseInt(slider_value)
-        var x = Math.pow(2, slider_value + 3);
-        console.log('slider_value: ' + '2^' + (slider_value + 3) + ' = ' + slider_value)
-        console.log('password length: ' + x)
-        let timeTo = 'Time to crack: ' + toString
-        document.getElementById("strengthLabel").textContent = timeTo
+        var x = length
 
         while (true) {
             var pick = Array.from({length: 4}, () => Math.floor(Math.random() * (x - 2) + 2));
@@ -127,30 +104,43 @@ function generatePassword(slider_value, numbersincluded, specialcharincluded) {
         password_list = shuffle(password_list);
         password = password_list.join("");
         console.log("Your password is: " + password);
-        document.getElementById("myTextbox").value = password;
-    } else if (numbersincluded == true && specialcharincluded == false) {
-        let strengthLabel = document.getElementById("strengthLabel")
-        let text;
-        switch (slider_value) {
-            case '0':
-                text = 'Medium'
-                break;
-            case '1':
-                text = 'Strong'
-                break;
-            case '2':
-                text = 'Really strong'
-                break;
-            case '3':
-                text = 'Really really strong'
-                break;
-        }
-        document.getElementById("strengthLabel").textContent = text
 
-        slider_value = parseInt(slider_value)
-        var x = Math.pow(2, slider_value + 3);
-        console.log('slider_value: ' + '2^' + (slider_value + 3) + ' = ' + slider_value)
-        console.log('password length: ' + x)
+    }
+
+    else if (numbersincluded == false && specialcharincluded == true) {
+
+            var x = length
+
+            while (true) {
+                var pick = Array.from({length: 4}, () => Math.floor(Math.random() * (x - 2) + 2));
+                if (pick.reduce((a, b) => a + b) === x) break;
+            }
+            var result = pick;
+
+            var numofletterlower = result[0];
+            var numofletterupper = result[1];
+            var numofsymbols = result[2];
+
+            var password = "";
+            for (var i = 0; i < numofletterlower; i++) {
+                password += lettersLower[Math.floor(Math.random() * lettersLower.length)];
+            }
+            for (var i = 0; i < numofletterupper; i++) {
+                password += lettersUpper[Math.floor(Math.random() * lettersUpper.length)];
+            }
+            for (var i = 0; i < numofsymbols; i++) {
+                password += symbols[Math.floor(Math.random() * symbols.length)];
+            }
+
+            var password_list = password.split("");
+            password_list = shuffle(password_list);
+            password = password_list.join("");
+            console.log("Your password is: " + password);
+
+        }
+
+    else if (numbersincluded == true && specialcharincluded == false) {
+        var x = length
 
         while (true) {
             var pick = Array.from({length: 3}, () => Math.floor(Math.random() * (x - 2) + 2));
@@ -176,14 +166,10 @@ function generatePassword(slider_value, numbersincluded, specialcharincluded) {
         var password_list = password.split("");
         password_list = shuffle(password_list);
         password = password_list.join("");
-        console.log("Your password is: " + password);
-        document.getElementById("myTextbox").value = password;
     }
 
-    slider_value = parseInt(slider_value)
-    var x = Math.pow(2, slider_value + 3);
-    console.log('slider_value: ' + '2^' + (slider_value + 3) + ' = ' + slider_value)
-    console.log('password length: ' + x)
+    else if (numbersincluded == false && specialcharincluded == false) {
+    var x = length
 
     while (true) {
         var pick = Array.from({length: 2}, () => Math.floor(Math.random() * (x - 2) + 2));
@@ -205,8 +191,6 @@ function generatePassword(slider_value, numbersincluded, specialcharincluded) {
     var password_list = password.split("");
     password_list = shuffle(password_list);
     password = password_list.join("");
-    console.log("Your password is: " + password);
-    document.getElementById("myTextbox").value = password;
 }
 
 function shuffle(array) {
@@ -227,35 +211,3 @@ function shuffle(array) {
 
     return array;
 }
-
-
-//pass word strength
-// function passwordstrength(userinput){
-//     const zxcvbn = require('zxcvbn');
-//
-//     let password = userinput;
-//
-//     let strength = zxcvbn(password).score;
-//
-//     console.log(strength);
-//
-//     return strength;
-// }
-
-
-// function updateContent1() {
-//     var inputValue = document.getElementById("myTextbox").value;
-//     console.log(inputValue);
-//     pwstrength = passwordstrength(userinput);
-//     console.log(pwstrength);
-//     document.getElementById("result").innerHTML = pwstrength;
-// }
-
-// const form = document.getElementById("login-form");
-// form.addEventListener("submit", (e) => {
-//     e.preventDefault();
-//     const email = form.elements.email.value;
-//     const password = form.elements.password.value;
-//     // Send login request to server
-//     // ...
-// });
