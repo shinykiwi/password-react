@@ -1,7 +1,7 @@
 //time to crack password
-function calculateTimeToCrack(password) {
+const calculateTimeToCrack = function(password) {
     // Get the number of possible characters for the password
-    let  characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%&*?";
+    let characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%&*?";
     const characterCount = characters.length;
 
     // Get the number of possible combinations for the password
@@ -10,14 +10,14 @@ function calculateTimeToCrack(password) {
     // Calculate the time to crack the password in seconds
     let timeTC = (combinationCount / 1000000000);
 
-    let timeTCSec = (timeTC%60);
-    timeTC = (timeTC - timeTCSec)/60;
+    let timeTCSec = (timeTC % 60);
+    timeTC = (timeTC - timeTCSec) / 60;
 
-    let timeTCMin = (timeTC%60);
-    timeTC = (timeTC - timeTCMin)/60;
+    let timeTCMin = (timeTC % 60);
+    timeTC = (timeTC - timeTCMin) / 60;
 
-    let timeTCHour = (timeTC%24);
-    timeTC = (timeTC - timeTCHour)/60;
+    let timeTCHour = (timeTC % 24);
+    timeTC = (timeTC - timeTCHour) / 60;
 
     let timeTCDay = (timeTC / 24);
 
@@ -29,19 +29,26 @@ function calculateTimeToCrack(password) {
     return toString;
 }
 
-//password generator
-function updateContent() {
-    var inputValue = document.getElementById("myTextbox").value;
-    console.log(inputValue);
-    returnpassword = generatePassword(Number(inputValue));
-    console.log(returnpassword);
-    document.getElementById("result").innerHTML = returnpassword;
-}
+export default calculateTimeToCrack;
+
+// //password generator
+// function updateContent() {
+//     var inputValue = document.getElementById("myTextbox").value;
+//     console.log(inputValue);
+//     returnpassword = generatePassword(Number(inputValue));
+//     console.log(returnpassword);
+//     document.getElementById("result").innerHTML = returnpassword;
+// }
 
 function generatePassword(slider_value, numbersincluded, specialcharincluded) {
+    const lettersLower = "abcdefghijklmnopqrstuvwxyz".split("");
+    const lettersUpper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+    const digits = "0123456789".split("");
+    const symbols = "!@#$%&*?".split("");
 
-    if(numbersincluded == true && specialcharincluded == true){
-        strengthLabel = document.getElementById("strengthLabel")
+    if (numbersincluded == true && specialcharincluded == true) {
+        let strengthLabel = document.getElementById("strengthLabel")
+        let text;
         switch (slider_value) {
             case '0':
                 text = '8 characters'
@@ -58,16 +65,12 @@ function generatePassword(slider_value, numbersincluded, specialcharincluded) {
         }
         document.getElementById("strengthLabel").textContent = text
 
-        const lettersLower = "abcdefghijklmnopqrstuvwxyz".split("");
-        const lettersUpper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
-        const digits = "0123456789".split("");
-        const symbols = "!@#$%&*?".split("");
 
         slider_value = parseInt(slider_value)
-        var x = Math.pow(2, slider_value+3);
-        console.log('slider_value: ' + '2^' + (slider_value+3) + ' = ' + slider_value)
+        var x = Math.pow(2, slider_value + 3);
+        console.log('slider_value: ' + '2^' + (slider_value + 3) + ' = ' + slider_value)
         console.log('password length: ' + x)
-        timeTo = 'Time to crack: ' + toString
+        let timeTo = 'Time to crack: ' + toString
         document.getElementById("strengthLabel").textContent = timeTo
 
         while (true) {
@@ -100,10 +103,9 @@ function generatePassword(slider_value, numbersincluded, specialcharincluded) {
         password = password_list.join("");
         console.log("Your password is: " + password);
         document.getElementById("myTextbox").value = password;
-    }
-
-    else if(numbersincluded == true && specialcharincluded == false){
-        strengthLabel = document.getElementById("strengthLabel")
+    } else if (numbersincluded == true && specialcharincluded == false) {
+        let strengthLabel = document.getElementById("strengthLabel")
+        let text;
         switch (slider_value) {
             case '0':
                 text = 'Medium'
@@ -120,14 +122,9 @@ function generatePassword(slider_value, numbersincluded, specialcharincluded) {
         }
         document.getElementById("strengthLabel").textContent = text
 
-        const lettersLower = "abcdefghijklmnopqrstuvwxyz".split("");
-        const lettersUpper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
-        const digits = "0123456789".split("");
-        const symbols = "!@#$%&*?".split("");
-
         slider_value = parseInt(slider_value)
-        var x = Math.pow(2, slider_value+3);
-        console.log('slider_value: ' + '2^' + (slider_value+3) + ' = ' + slider_value)
+        var x = Math.pow(2, slider_value + 3);
+        console.log('slider_value: ' + '2^' + (slider_value + 3) + ' = ' + slider_value)
         console.log('password length: ' + x)
 
         while (true) {
@@ -158,114 +155,33 @@ function generatePassword(slider_value, numbersincluded, specialcharincluded) {
         document.getElementById("myTextbox").value = password;
     }
 
-    else if(numbersincluded == false && specialcharincluded == true){
-        strengthLabel = document.getElementById("strengthLabel")
-        switch (slider_value) {
-            case '0':
-                text = 'Medium'
-                break;
-            case '1':
-                text = 'Strong'
-                break;
-            case '2':
-                text = 'Really strong'
-                break;
-            case '3':
-                text = 'Really really strong'
-                break;
-        }
-        document.getElementById("strengthLabel").textContent = text
+    slider_value = parseInt(slider_value)
+    var x = Math.pow(2, slider_value + 3);
+    console.log('slider_value: ' + '2^' + (slider_value + 3) + ' = ' + slider_value)
+    console.log('password length: ' + x)
 
-        const lettersLower = "abcdefghijklmnopqrstuvwxyz".split("");
-        const lettersUpper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
-        const digits = "0123456789".split("");
-        const symbols = "!@#$%&*?".split("");
+    while (true) {
+        var pick = Array.from({length: 2}, () => Math.floor(Math.random() * (x - 2) + 2));
+        if (pick.reduce((a, b) => a + b) === x) break;
+    }
+    var result = pick;
 
-        slider_value = parseInt(slider_value)
-        var x = Math.pow(2, slider_value+3);
-        console.log('slider_value: ' + '2^' + (slider_value+3) + ' = ' + slider_value)
-        console.log('password length: ' + x)
+    var numofletterlower = result[0];
+    var numofletterupper = result[1];
 
-        while (true) {
-            var pick = Array.from({length: 3}, () => Math.floor(Math.random() * (x - 2) + 2));
-            if (pick.reduce((a, b) => a + b) === x) break;
-        }
-        var result = pick;
-
-        var numofletterlower = result[0];
-        var numofletterupper = result[1];
-        var numofsymbols = result[2];
-
-        var password = "";
-        for (var i = 0; i < numofletterlower; i++) {
-            password += lettersLower[Math.floor(Math.random() * lettersLower.length)];
-        }
-        for (var i = 0; i < numofletterupper; i++) {
-            password += lettersUpper[Math.floor(Math.random() * lettersUpper.length)];
-        }
-        for (var i = 0; i < numofsymbols; i++) {
-            password += symbols[Math.floor(Math.random() * symbols.length)];
-        }
-
-        var password_list = password.split("");
-        password_list = shuffle(password_list);
-        password = password_list.join("");
-        console.log("Your password is: " + password);
-        document.getElementById("myTextbox").value = password;
+    var password = "";
+    for (var i = 0; i < numofletterlower; i++) {
+        password += lettersLower[Math.floor(Math.random() * lettersLower.length)];
+    }
+    for (var i = 0; i < numofletterupper; i++) {
+        password += lettersUpper[Math.floor(Math.random() * lettersUpper.length)];
     }
 
-
-    else if(numbersincluded == false && specialcharincluded == false){
-        strengthLabel = document.getElementById("strengthLabel")
-        switch (slider_value) {
-            case '0':
-                text = 'Medium'
-                break;
-            case '1':
-                text = 'Strong'
-                break;
-            case '2':
-                text = 'Really strong'
-                break;
-            case '3':
-                text = 'Really really strong'
-                break;
-        }
-        document.getElementById("strengthLabel").textContent = text
-
-        const lettersLower = "abcdefghijklmnopqrstuvwxyz".split("");
-        const lettersUpper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
-        const digits = "0123456789".split("");
-        const symbols = "!@#$%&*?".split("");
-
-        slider_value = parseInt(slider_value)
-        var x = Math.pow(2, slider_value+3);
-        console.log('slider_value: ' + '2^' + (slider_value+3) + ' = ' + slider_value)
-        console.log('password length: ' + x)
-
-        while (true) {
-            var pick = Array.from({length: 2}, () => Math.floor(Math.random() * (x - 2) + 2));
-            if (pick.reduce((a, b) => a + b) === x) break;
-        }
-        var result = pick;
-
-        var numofletterlower = result[0];
-        var numofletterupper = result[1];
-
-        var password = "";
-        for (var i = 0; i < numofletterlower; i++) {
-            password += lettersLower[Math.floor(Math.random() * lettersLower.length)];
-        }
-        for (var i = 0; i < numofletterupper; i++) {
-            password += lettersUpper[Math.floor(Math.random() * lettersUpper.length)];
-        }
-
-        var password_list = password.split("");
-        password_list = shuffle(password_list);
-        password = password_list.join("");
-        console.log("Your password is: " + password);
-        document.getElementById("myTextbox").value = password;
-    }
+    var password_list = password.split("");
+    password_list = shuffle(password_list);
+    password = password_list.join("");
+    console.log("Your password is: " + password);
+    document.getElementById("myTextbox").value = password;
 }
 
 function shuffle(array) {
@@ -289,32 +205,32 @@ function shuffle(array) {
 
 
 //pass word strength
-function passwordstrength(userinput){
-    const zxcvbn = require('zxcvbn');
+// function passwordstrength(userinput){
+//     const zxcvbn = require('zxcvbn');
+//
+//     let password = userinput;
+//
+//     let strength = zxcvbn(password).score;
+//
+//     console.log(strength);
+//
+//     return strength;
+// }
 
-    let password = userinput;
 
-    let strength = zxcvbn(password).score;
+// function updateContent1() {
+//     var inputValue = document.getElementById("myTextbox").value;
+//     console.log(inputValue);
+//     pwstrength = passwordstrength(userinput);
+//     console.log(pwstrength);
+//     document.getElementById("result").innerHTML = pwstrength;
+// }
 
-    console.log(strength);
-
-    return strength;
-}
-
-
-function updateContent1() {
-    var inputValue = document.getElementById("myTextbox").value;
-    console.log(inputValue);
-    pwstrength = passwordstrength(userinput);
-    console.log(pwstrength);
-    document.getElementById("result").innerHTML = pwstrength;
-}
-
-const form = document.getElementById("login-form");
-form.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const email = form.elements.email.value;
-    const password = form.elements.password.value;
-    // Send login request to server
-    // ...
-});
+// const form = document.getElementById("login-form");
+// form.addEventListener("submit", (e) => {
+//     e.preventDefault();
+//     const email = form.elements.email.value;
+//     const password = form.elements.password.value;
+//     // Send login request to server
+//     // ...
+// });

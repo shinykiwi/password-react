@@ -12,6 +12,7 @@ import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgr
 import VpnKeyIcon from '@mui/icons-material/VpnKey';
 import InfoIcon from '@mui/icons-material/Info';
 import {useState} from "react";
+import calculateTimeToCrack from "./passwordgenerator";
 
 function valuetext(value) {
     return `${value}°C`;
@@ -21,12 +22,14 @@ function App() {
     const [strength, setStrength] = useState(8);
     const [strColour, setStrColour] = useState("#1ea95a")
     const [length, setLength] = useState(8);
-    const [noun, setNoun] = useState("Poor");
+    const [noun, setNoun] = useState("Weak");
+    const [crack_time, setCrackTime] = useState("N/A");
 
     const handleChange = (e) => {
         const val = e.target.value
         console.log(val)
         setStrength(val)
+        setCrackTime(calculateTimeToCrack('password123'))
 
         if(val === 8){
             setNoun("Weak")
@@ -98,7 +101,7 @@ function App() {
                         <div>
                             <BorderLinearProgress variant="determinate" value={strength} />
                         </div>
-                        <p>Time to crack: <span>44d 1hr</span></p>
+                        <p>Time to crack: <span>{crack_time}</span></p>
                     </Box>
                 </div>
                 <div className={"flex-col"}>
