@@ -143,7 +143,7 @@ function App() {
                                 step={8}
                                 marks
                                 min={8}
-                                max={32}
+                                max={48}
                                 onChange={(e)=> handleChange(e)}
                             />
                         </div>

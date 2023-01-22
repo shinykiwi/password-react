@@ -2,29 +2,54 @@
 const calculateTimeToCrack = function(password) {
     // Get the number of possible characters for the password
     let characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%&*?";
-    const characterCount = characters.length;
+    let characterCount = 0;
 
     // Get the number of possible combinations for the password
+    const lettersLower = "abcdefghijklmnopqrstuvwxyz".split("");
+    const lettersUpper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+    const digits = "0123456789".split("");
+    const symbols = "!@#$%&*?".split("");
+    let containsLowercase = lettersLower.some(char =>password.includes(char))
+    let containsUppercase = lettersUpper.some(char =>password.includes(char))
+    let containsDigits = digits.some(char =>password.includes(char))
+    let containsSymbols = symbols.some(char =>password.includes(char))
+
+    if (containsLowercase){
+        characterCount+=26
+    }
+    if (containsUppercase){
+        characterCount+=26
+    }
+    if (containsDigits){
+        characterCount+=10
+    }
+    if (containsSymbols){
+        characterCount+=8
+    }
+
     let combinationCount = Math.pow(characterCount, password.length);
-    console.log(combinationCount)
+    console.log('comb count: ' + combinationCount)
     // Calculate the time to crack the password in seconds
     let timeTC = (combinationCount / 1000000000);
 
-    let timeTCSec = (timeTC % 60);
+    let timeTCSec = Math.floor(timeTC % 60);
     timeTC = (timeTC - timeTCSec) / 60;
 
-    let timeTCMin = (timeTC % 60);
+    let timeTCMin = Math.floor(timeTC % 60);
     timeTC = (timeTC - timeTCMin) / 60;
 
-    let timeTCHour = (timeTC % 24);
+    let timeTCHour = Math.floor(timeTC % 24);
     timeTC = (timeTC - timeTCHour) / 60;
 
-    let timeTCDay = (timeTC / 24);
+    let timeTCDay = Math.floor(timeTC % 24);
+    timeTC = (timeTC - timeTCDay) / 24;
 
-    console.log("Day: " + timeTCDay + " Hour: " + timeTCHour + " Minute: " + timeTCMin + " Second: " + timeTCSec);
+    let timeTCYear = Math.floor(timeTC / 365);
+
+    console.log("Year: " + timeTCYear + " Day: " + timeTCDay + " Hour: " + timeTCHour + " Minute: " + timeTCMin + " Second: " + timeTCSec);
 
     // Return the time to crack in minutes
-    let toString = ("Day: " + timeTCDay + " Hour: " + timeTCHour + " Minute: " + timeTCMin + " Second: " + timeTCSec);
+    let toString = ("Year: " + timeTCYear + " Day: " + timeTCDay + " Hour: " + timeTCHour + " Minute: " + timeTCMin + " Second: " + timeTCSec);
 
     return toString;
 }
