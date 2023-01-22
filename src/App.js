@@ -120,7 +120,7 @@ function App() {
   return (
     <div className="App">
         <div className={"container"}>
-            <div className={"flex"}>
+            <div className={"box2"}>
                 <div className={"flex-col"} >
                     <Box className={"box"}>
                         <h2>Create a password</h2>
