@@ -27,15 +27,9 @@ export const calculateTimeToCrack = function (password) {
         characterCount += 8
     }
 
-    let combinationCount = factorial(characterCount)
-    function factorial(n) {
-        if (n === 0) {
-            return 1;
-        }
-        return n * factorial(n - 1);
-    }
+    let combinationCount = Math.pow(characterCount, password.length)
     // Calculate the time to crack the password in seconds
-    let total_time = (combinationCount / 1000000000);
+    let total_time = (combinationCount / 2000000000);
     console.log('combinations: ' + combinationCount)
 
     let seconds = Math.floor(total_time % 60);
