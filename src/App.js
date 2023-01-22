@@ -140,28 +140,6 @@ function App() {
                         <p>Time to crack: <span>{crack_time}</span></p>
                     </Box>
                 </div>
-                <div className={"flex-col"}>
-                    <Box className={"box"}>
-                        <div className={"flex-col"}>
-                            <div className={"button"}>
-                                <Alert severity="warning">
-                                    <AlertTitle>Review passwords</AlertTitle>
-                                    One of your passwords was leaked in a recent breach <strong>7 days ago.</strong>
-                                </Alert>
-                            </div>
-                            <div className={"button"}>
-                                <Button  variant="contained" startIcon={<VpnKeyIcon />}>
-                                    Passwords
-                                </Button>
-                            </div>
-                            <div className={"button"}>
-                                <Button  variant="contained" startIcon={<InfoIcon />}>
-                                    Info
-                                </Button>
-                            </div>
-                        </div>
-                    </Box>
-                </div>
             </div>
         </div>
     </div>
