@@ -54,29 +54,24 @@ function App() {
         if (specialChar)
             strength += (1 / 8) * 100
 
-        // length slider
         if (length <= 8) {
-            noun = "Weak"
-            strength += (1 / 8) * 100
-        } else if (length <= 16) {
             noun = "Ok"
             strength += (2 / 8) * 100
-        } else if (length <= 24) {
+        } else if (length <= 14) {
             noun = "Good"
             strength += (3 / 8) * 100
-        } else if (length <= 32) {
+        } else if (length <= 20) {
             noun = "Great"
             strength += (4 / 8) * 100
-        } else if (length <= 40) {
+        } else if (length <= 26) {
             noun = "Strong"
             strength += (5 / 8) * 100
-        } else if (length <= 48) {
+        } else if (length <= 32) {
             noun = "Very Strong"
             strength += (6 / 8) * 100
         }
         setNoun(noun)
         setStrength(strength)
-        console.log('strength: ' + strength)
     }
 
 
@@ -94,11 +89,13 @@ function App() {
     }));
 
 
+
+
   return (
     <div className="App">
         <link href="https://fonts.cdnfonts.com/css/8bit-wonder" rel="stylesheet"/>
         <div className={"container"}>
-            <div className={"box2"}>
+            <div className={"box2"} style={{marginLeft: -30}}>
                 <div className={"flex-col"} >
                     <Box className={"box"}>
                         <h2>Create a password</h2>

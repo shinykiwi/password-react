@@ -4,7 +4,7 @@ function createWindow () {
     // Create the browser window.
     const win = new BrowserWindow({
         width: 450,
-        height: 650,
+        height: 600,
         webPreferences: {
             nodeIntegration: true
         }
@@ -14,7 +14,6 @@ function createWindow () {
     win.loadURL('http://localhost:3000');
 
     win.autoHideMenuBar = true;
-    win.setTitle("BitPass")
 
     // Open the DevTools.
     // win.webContents.openDevTools()
