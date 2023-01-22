@@ -12,8 +12,9 @@ import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgr
 import VpnKeyIcon from '@mui/icons-material/VpnKey';
 import InfoIcon from '@mui/icons-material/Info';
 import ShuffleOnIcon from '@mui/icons-material/ShuffleOn';
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import calculateTimeToCrack from "./passwordgenerator";
+import generatePassword from "./passwordgenerator";
 
 function valuetext(value) {
     return `${value}`;
@@ -32,25 +33,37 @@ function App() {
     const [noun, setNoun] = useState("Weak");
     const [crack_time, setCrackTime] = useState(calculateTimeToCrack(password));
 
+
     const handleTextChange = (e) => {
-        setPassword(e.target.value)
-        handleChange()
+        let val = e.target.value
+        setLength(val.length)
+        setPassword(val)
     }
+    useEffect(() => {
+        handleChange();
+    }, [password])
 
     const handleSpecial = (e) => {
         setSpecialChar(e.target.checked)
-        handleChange()
     }
+    useEffect(() => {
+        handleChange();
+    }, [specialChar])
 
     const handleNumbers = (e) => {
         setNumbers(e.target.checked)
-        handleChange()
     }
+    useEffect(() => {
+        handleChange();
+    }, [numbers])
 
     const handleSliderChange = (e) => {
+
         setLength(e.target.value)
-        handleChange()
     }
+    useEffect(() => {
+        handleChange();
+    }, [length])
 
 
     const handleChange = () => {
@@ -90,8 +103,9 @@ function App() {
         console.log('strength: ' + strength)
     }
 
-    const onGenerate = (e) =>{
-
+    const onGenerate = () =>{
+        // generate password
+        // generatePassword(password)
     }
 
     const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
@@ -115,12 +129,16 @@ function App() {
                     <Box className={"box"}>
                         <h2>Create a password</h2>
                         <div>
-                            <TextField id="outlined-basic" label="Password" value={password} variant="outlined"
+                            <TextField id="outlined-basic"
+                                       label="Password"
+                                       value={password}
+                                       inputProps={{ maxLength: 48 }}
+                                       variant="outlined"
                                        onChange={(e) => handleTextChange(e)}/>
                             <IconButton aria-label="copy" onClick={() => {navigator.clipboard.writeText(password)}}>
                                 <ContentCopyIcon />
                             </IconButton>
-                            <IconButton aria-label="generate" onClick={(e) => onGenerate(e)}>
+                            <IconButton aria-label="generate" onClick={() => onGenerate()}>
                                 <ShuffleOnIcon />
                             </IconButton>
                         </div>
@@ -134,10 +152,11 @@ function App() {
                             <p>Length</p>
                             <Slider
                                 aria-label="Length"
-                                defaultValue={length}
+                                defaultValue={8}
+                                value={length}
                                 getAriaValueText={valuetext}
                                 valueLabelDisplay="auto"
-                                step={8}
+                                // step={8}
                                 marks
                                 min={8}
                                 max={48}
